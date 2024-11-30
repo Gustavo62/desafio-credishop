@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  min: 1.5
+  max: 1.5
+  description: MyString
+  discount: 1.5
+  position: 1
+
+two:
+  min: 1.5
+  max: 1.5
+  description: MyString
+  discount: 1.5
+  position: 1

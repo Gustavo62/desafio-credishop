@@ -1,0 +1,56 @@
+<%= form_with(model: discount_rate, class: "needs-validation", local: true) do |form| %>
+  <% if discount_rate.errors.any? %>
+    <div class="alert alert-danger">
+      <h2><%= pluralize(discount_rate.errors.count, "error") %> prohibited this discount rate from being saved:</h2>
+      <ul>
+        <% discount_rate.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="mb-3">
+    <%= form.label :description, class: "form-label" %>
+    <%= form.text_field :description, class: "form-control", placeholder: "Enter description" %>
+  </div>
+
+  <div class="row mb-3">
+    <div class="col-md-6">
+      <%= form.label :min, class: "form-label" %>
+      <%= form.text_field :min, class: "form-control", placeholder: "Enter minimum value" %>
+    </div>
+
+    <div class="col-md-6">
+      <%= form.label :max, class: "form-label" %>
+      <%= form.text_field :max, class: "form-control", placeholder: "Enter maximum value" %>
+    </div>
+  </div>
+
+
+  <div class="mb-3">
+    <%= form.label :discount, class: "form-label" %>
+    <%= form.text_field :discount, class: "form-control", placeholder: "Enter discount rate" %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :position, class: "form-label" %>
+    <%= form.number_field :position, class: "form-control", placeholder: "Enter position" %>
+  </div>
+
+  <div class="row mb-3">
+    <div class="col-md-6">
+      <%= form.label :year, class: "form-label" %>
+      <%= form.select :year, options_for_select((2000..2050).to_a), {}, class: "form-control" %>
+    </div>
+
+    <div class="col-md-6">
+      <%= form.label :active, class: "form-label" %>
+      <%= form.check_box :active, class: "form-control" %>
+    </div>
+  </div>
+
+  <div>
+    <%= form.submit "Save", class: "btn btn-primary" %>
+  </div>
+<% end %>

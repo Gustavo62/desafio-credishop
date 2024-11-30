@@ -1,0 +1,2 @@
+module DiscountRatesHelper
+end

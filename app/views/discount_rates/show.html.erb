@@ -1,0 +1,19 @@
+<p class="text-success"><%= notice %></p>
+
+<div class="card mb-3">
+  <div class="card-body">
+    <%= render @discount_rate %>
+  </div>
+</div>
+
+<div class="d-flex justify-content-between mt-3">
+  <div>
+    <%= link_to "Edit this discount rate", edit_discount_rate_path(@discount_rate), class: "btn btn-warning btn-sm" %>
+  </div>
+  <div>
+    <%= link_to "Back to discount rates", discount_rates_path, class: "btn btn-secondary btn-sm" %>
+  </div>
+  <div>
+    <%= button_to "Destroy this discount rate", @discount_rate, method: :delete, class: "btn btn-danger btn-sm", data: { confirm: "Are you sure you want to delete this discount rate?" } %>
+  </div>
+</div>

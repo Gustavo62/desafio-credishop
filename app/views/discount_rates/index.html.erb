@@ -1,0 +1,49 @@
+<div class="container mt-4">
+  <% if notice.present? %>
+    <div class="alert alert-success">
+      <%= notice %>
+    </div>
+  <% end %>
+
+  <% content_for :title, "Discount rates" %>
+
+  <h1 class="mb-4">Discount rates</h1>
+
+  <div id="discount_rates" class="row">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Min</th>
+          <th scope="col">Max</th>
+          <th scope="col">Description</th>
+          <th scope="col">Discount</th>
+          <th scope="col">Position</th>
+          <th scope="col">Year</th>
+          <th scope="col">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @discount_rates.each do |discount_rate| %>
+          <tr>
+            <th scope="row"><%= discount_rate.id %></th>
+            <td><%= discount_rate.min %></td>
+            <td><%= discount_rate.max %></td>
+            <td><%= discount_rate.description %></td>
+            <td><%= discount_rate.discount %></td>
+            <td><%= discount_rate.position %></td>
+            <td><%= discount_rate.year %></td>
+            <td>
+              <%= link_to "Show", discount_rate, class: "btn btn-primary btn-sm" %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+  </div>
+
+  <div class="mt-4">
+    <%= link_to "New discount rate", new_discount_rate_path, class: "btn btn-success" %>
+  </div>
+</div>
