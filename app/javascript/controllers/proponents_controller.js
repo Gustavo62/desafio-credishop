@@ -1,6 +1,5 @@
 import { Controller } from "stimulus"
 import { phoneInputMask, moneyInputMask, cpfInputMask, cepInputMask } from "./shared";
-import { showLoading, hideLoading } from "./loading";
 
 export default class extends Controller {
   connect() {
