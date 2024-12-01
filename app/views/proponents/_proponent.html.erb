@@ -1,0 +1,66 @@
+<div id="<%= dom_id proponent %>" class="border rounded p-4 mb-4">
+  <div class="row mb-3">
+    <div class="col-md-6">
+      <p><strong>Name:</strong> <%= proponent.name %></p>
+    </div>
+    <div class="col-md-6">
+      <p><strong>Cpf:</strong> <%= proponent.cpf %></p>
+    </div>
+  </div>
+
+  <div class="row mb-3">
+    <div class="col-md-6">
+      <p><strong>Birthday:</strong> <%= proponent.birthday %></p>
+    </div>
+    <div class="col-md-6">
+      <p><strong>Salary:</strong> <%= proponent.salary %></p>
+    </div>
+  </div>
+
+  <div class="row mb-3">
+    <div class="col-md-6">
+      <p><strong>Inss discount:</strong> <%= proponent.inss_discount %></p>
+    </div>
+  </div>
+
+  <div class="row mb-3">
+    <div class="col-md-12">
+      <h5>Addresses:</h5>
+      <% if proponent.addresses.any? %>
+        <ul class="list-group">
+          <% proponent.addresses.each do |address| %>
+            <li class="list-group-item">
+              <strong>Street:</strong> <%= address.street %><br>
+              <strong>Number:</strong> <%= address.number %><br>
+              <strong>Neighborhood:</strong> <%= address.neighborhood %><br>
+              <strong>City:</strong> <%= address.city %><br>
+              <strong>State:</strong> <%= address.state %><br>
+              <strong>Zip Code:</strong> <%= address.zip_code %>
+            </li>
+          <% end %>
+        </ul>
+      <% else %>
+        <p>No addresses available.</p>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="row mb-3">
+    <div class="col-md-12">
+      <h5>Contacts:</h5>
+      <% if proponent.contacts.any? %>
+        <ul class="list-group">
+          <% proponent.contacts.each do |contact| %>
+            <li class="list-group-item">
+              <strong>Phone:</strong> <%= contact.phone %><br>
+              <strong>Contact Type:</strong> <%= contact.contact_type %>
+            </li>
+          <% end %>
+        </ul>
+      <% else %>
+        <p>No contacts available.</p>
+      <% end %>
+    </div>
+  </div>
+
+</div>

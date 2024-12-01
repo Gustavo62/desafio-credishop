@@ -1,10 +1,17 @@
 const { environment } = require('@rails/webpacker')
 
-// Define the entry point explicitly
 environment.config.merge({
   entry: {
-    application: './app/javascript/packs/application.js', // ou o caminho do seu pack
+    application: './app/javascript/packs/application.js',
   }
+})
+
+environment.config.set('node', {
+  dns: 'empty',
+  async_hooks: 'empty',
+  bson_ext: 'empty',
+  kerberos: 'empty',
+  snappy: 'empty',
 })
 
 module.exports = environment

@@ -1,0 +1,21 @@
+<div class="container mt-4">
+  <% if notice %>
+    <div class="alert alert-success" role="alert">
+      <%= notice %>
+    </div>
+  <% end %>
+
+  <div class="card">
+    <div class="card-header">
+      <h2>Proponent Details</h2>
+    </div>
+    <div class="card-body">
+      <%= render @proponent %>
+    </div>
+    <div class="card-footer d-flex justify-content-between">
+      <%= link_to "Edit this proponent", edit_proponent_path(@proponent), class: "btn btn-warning" %>
+      <%= link_to "Back to proponents", proponents_path, class: "btn btn-secondary" %>
+      <%= button_to "Destroy this proponent", @proponent, method: :delete, data: { confirm: "Are you sure you want to delete this proponent?" }, class: "btn btn-danger" %>
+    </div>
+  </div>
+</div>

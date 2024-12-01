@@ -1,0 +1,15 @@
+<% content_for :title, "New Proponent" %>
+
+<div class="container mt-4">
+  <h1 class="mb-4">Create a New Proponent</h1>
+
+  <div class="card">
+    <div class="card-body">
+      <%= render "form", proponent: @proponent %>
+    </div>
+  </div>
+
+  <div class="mt-3">
+    <%= link_to "Back to Proponents", proponents_path, class: "btn btn-secondary" %>
+  </div>
+</div>

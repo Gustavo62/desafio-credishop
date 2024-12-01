@@ -1,0 +1,42 @@
+<% content_for :title, "Proponents" %>
+
+<div class="container mt-4">
+  <% if notice.present? %>
+    <div class="alert alert-success">
+      <%= notice %>
+    </div>
+  <% end %>
+
+  <h1 class="mb-4">Proponents</h1>
+
+  <div id="proponents">
+    <table class="table table-bordered table-striped">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Name</th>
+          <th scope="col">CPF</th>
+          <th scope="col">Salary</th>
+          <th scope="col">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @proponents.each do |proponent| %>
+          <tr>
+            <th scope="row"><%= proponent.id %></th>
+            <td><%= proponent.name %></td>
+            <td><%= proponent.cpf %></td>
+            <td><%= number_to_currency(proponent.salary, unit: "R$") if proponent.salary.present? %></td>
+            <td>
+              <%= link_to "Show", proponent, class: "btn btn-primary btn-sm" %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="mt-4">
+    <%= link_to "New Proponent", new_proponent_path, class: "btn btn-success" %>
+  </div>
+</div>

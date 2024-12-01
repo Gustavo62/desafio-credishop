@@ -1,0 +1,71 @@
+<%= form_with(model: proponent, class: "needs-validation", local: true) do |form| %>
+  <% if proponent.errors.any? %>
+    <div class="alert alert-danger">
+      <h4><%= pluralize(proponent.errors.count, "error") %> prohibited this proponent from being saved:</h4>
+      <ul>
+        <% proponent.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="row mb-3">
+    <div class="col-md-6">
+      <%= form.label :name, class: "form-label" %>
+      <%= form.text_field :name, class: "form-control", placeholder: "Enter full name" %>
+    </div>
+    <div class="col-md-6">
+      <%= form.label :cpf, class: "form-label" %>
+      <%= form.text_field :cpf, class: "form-control cpf-mask", placeholder: "Enter CPF" %>
+    </div>
+  </div>
+
+  <div class="row mb-3">
+    <div class="col-md-4">
+      <%= form.label :birthday, class: "form-label" %>
+      <%= form.date_field :birthday, class: "form-control" %>
+    </div>
+    <div class="col-md-4">
+      <%= form.label :salary, class: "form-label" %>
+      <%= form.text_field :salary, class: "form-control money-mask", placeholder: "Enter salary", data: {action: "change->proponents#calculateDiscount"} %>
+    </div>
+    <div class="col-md-4">
+      <%= form.label :inss_discount, class: "form-label" %>
+      <%= form.text_field :inss_discount, class: "form-control money-mask", placeholder: "Enter salary", data: { target: "proponents.inssDiscount" }, disabled: true%>
+    </div>
+  </div>
+
+  <div id="contacts" class="mb-4">
+    <h5>Contacts</h5>
+    <%= form.simple_fields_for :contacts do |contact| %>
+      <%= render 'proponents/contact_fields', f: contact %>
+    <% end %>
+    <%= link_to_add_association 'Add Contact', form, :contacts, 
+        partial: "proponents/contact_fields", 
+        class: "btn btn-outline-primary btn-sm mt-2",
+        data: {action: "click->proponents#addNestedField"} %>
+  </div>
+
+  <div id="addresses" class="mb-4">
+    <h5>Addresses</h5>
+    <%= form.simple_fields_for :addresses do |address| %>
+      <%= render 'proponents/address_fields', f: address %>
+    <% end %>
+    <%= link_to_add_association 'Add Address', form, :addresses, 
+        partial: "proponents/address_fields", 
+        class: "btn btn-outline-primary btn-sm mt-2",
+        data: {action: "click->proponents#addNestedField"} %>
+  </div>
+
+  <div class="row mb-3">
+    <div class="col-md-6">
+      <%= form.label :inss_discount, class: "form-label" %>
+      <%= form.text_field :inss_discount, class: "form-control", placeholder: "Enter INSS discount" %>
+    </div>
+  </div>
+
+  <div class="d-flex justify-content-end">
+    <%= form.submit "Save Proponent", class: "btn btn-primary" %>
+  </div>
+<% end %>
