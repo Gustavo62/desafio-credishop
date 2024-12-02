@@ -9,6 +9,25 @@ export function phoneInputMask() {
   });
 }
 
+export function percentageInputMask(){
+  const percentageFields = document.querySelectorAll(".percentage-mask");
+
+  percentageFields.forEach((field) => {
+    const mask = new Inputmask({
+      alias: "decimal",
+      radixPoint: ".",
+      groupSeparator: ",",
+      digits: 2,
+      autoGroup: true,
+      suffix: " %",
+      rightAlign: false,
+      allowMinus: false,
+      max: 100,
+    });
+
+    mask.mask(field);
+  });
+}
 export function moneyInputMask() {
   const moneyFields = document.querySelectorAll(".money-mask");
 
@@ -22,6 +41,7 @@ export function moneyInputMask() {
         radixPoint: ",",
         autoGroup: true,
         digits: 2,
+        digitsOptional: false,
         rightAlign: false,
         allowMinus: false,
         max: 9999999999.99,

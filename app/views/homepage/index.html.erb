@@ -1,39 +1,61 @@
 <div class="card">
   <div class="card-body">
     <h5 class="card-title">Dashboard</h5>
-    <h6 class="card-subtitle mb-2 text-muted">Visão de proponentes por classificação de acordo com tabela de <%= link_to "INSS", root_path %></h6>
+    <h6 class="card-subtitle mb-2 text-muted">Visão de proponentes por classificação de acordo com tabela de <%= link_to "INSS", discount_rates_path %></h6>
 
     <div class="p-5" style="width:440px;height:440px">
       <canvas id="pie-chart-proponent"></canvas>
     </div>
 
+    <%= form_with url: root_path, method: :get, local: true do %>
+      <div class="filter mb-4">
+        <div class="row align-items-center">
+          <div class="col-md-6 col-lg-12  ">
+            <%= label_tag :group_discount, 'Selecione o Grupo', class: 'form-label' %>
+            <div class="d-flex w-100">
+              <%= select_tag :group_discount,
+                options_from_collection_for_select(@discount_rates,
+                :position,
+                lambda { |discount_rate| "#{discount_rate.min} - #{discount_rate.max}" },
+                params.dig(:group_discount)),
+                include_blank: "Todos",
+                class: "form-control mr-3"
+              %>
 
-    <h5 class="card-title">Planilha de proponentes</h5>
-    <div class="table-div">
-      <table class="table">
-        <thead>
+              <%= submit_tag 'Filtrar', class: 'btn btn-primary ml-auto' %>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+
+
+
+    <table class="table table-bordered table-striped">
+      <thead class="thead-dark">
+        <tr>
+          <th>#</th>
+          <th>Nome</th>
+          <th>CPF</th>
+          <th>Salário</th>
+          <th>Grupo de Desconto</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @proponents.each do |proponent| %>
           <tr>
-            <th scope="col">#</th>
-            <th scope="col">First</th>
-            <th scope="col">Last</th>
-            <th scope="col">Handle</th>
+            <td><%= proponent.id %></td>
+            <td><%= proponent.name %></td>
+            <td><%= proponent.cpf %></td>
+            <td><%= proponent.salary %></td>
+            <td><%= proponent.group_discount %></td>
           </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-          </tr>
-          <tr>
-            <th scope="row">2</th>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td>@fat</td>
-          </tr>
-        </tbody>
-      </table>
+        <% end %>
+      </tbody>
+    </table>
+    <div class="mt-4 d-flex justify-content-center">
+      <%= paginate @proponents %>
     </div>
+
   </div>
 </div>

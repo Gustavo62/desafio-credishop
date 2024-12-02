@@ -29,10 +29,10 @@
             <li class="nav-item <%= 'active' if current_page?('/') %>">
               <%= link_to 'Home', root_path, class: "nav-link" %>
             </li>
-            <li class="nav-item <%= 'active' if current_page?('/proponents') %>">
+            <li class="nav-item <%= 'active' if controller_path.start_with?('proponents') %>">
               <%= link_to 'Proponentes', proponents_path, class: "nav-link" %>
             </li>
-            <li class="nav-item <%= 'active' if current_page?('/discount_rates') %>">
+            <li class="nav-item <%= 'active' if controller_path.start_with?('discount_rates') %>">
               <%= link_to 'Bases INSS', discount_rates_path, class: "nav-link" %>
             </li>
             <li class="nav-item">
@@ -46,7 +46,7 @@
         </div>
       </div>
     </nav>
-    <div class="container">
+    <div class="container mb-4">
       <%= yield %>
     </div>
   </body>

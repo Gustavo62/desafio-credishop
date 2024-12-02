@@ -17,6 +17,8 @@
           <th scope="col">Name</th>
           <th scope="col">CPF</th>
           <th scope="col">Salary</th>
+          <th scope="col">Discount</th>
+          <th scope="col">Group</th>
           <th scope="col">Actions</th>
         </tr>
       </thead>
@@ -26,7 +28,9 @@
             <th scope="row"><%= proponent.id %></th>
             <td><%= proponent.name %></td>
             <td><%= proponent.cpf %></td>
-            <td><%= number_to_currency(proponent.salary, unit: "R$") if proponent.salary.present? %></td>
+            <td><%= proponent.salary %></td>
+            <td><%= proponent.inss_discount %></td>
+            <td><%= proponent.group_discount %></td>
             <td>
               <%= link_to "Show", proponent, class: "btn btn-primary btn-sm" %>
             </td>
@@ -34,6 +38,9 @@
         <% end %>
       </tbody>
     </table>
+    <div class="mt-4 d-flex justify-content-center">
+      <%= paginate @proponents %>
+    </div>
   </div>
 
   <div class="mt-4">

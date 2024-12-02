@@ -2,7 +2,15 @@ class ProponentsController < ApplicationController
   before_action :set_proponent, only: %i[ show edit update destroy ]
 
   def index
-    @proponents = Proponent.all
+    per_page = params[:per_page] || 5
+    per_page = Proponent.count if params[:per_page] == "all"
+    @proponents = Proponent.all.page(params[:page]).per(per_page)
+    @discount_rates = DiscountRate.all.active
+
+    respond_to do |format|
+      format.html { render status: :ok }
+      format.json { render json: { proponents: @proponents, discount_rates: @discount_rates}, status: :ok }
+    end
   end
 
   def show
@@ -60,7 +68,7 @@ class ProponentsController < ApplicationController
     end
 
     begin
-      inss_discount = DiscountRate.calculate_discount(nil, 1, salary, 0.0)
+      inss_discount, group_discount = DiscountRate.calculate_discount(nil, 1, salary, 0.0)
 
       if inss_discount.nil?
         return render json: { error: 'Erro ao calcular o desconto INSS' }, status: :unprocessable_entity

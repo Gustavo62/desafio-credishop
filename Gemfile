@@ -12,7 +12,6 @@ gem "bootsnap", require: false
 gem "guard"
 gem "guard-livereload", require: false
 gem "bootstrap", "~> 4.3.1"
-gem "sidekiq"
 gem "redis"
 gem "rubocop", require: false
 gem "rubocop-rails", require: false
@@ -29,6 +28,7 @@ group :development, :test do
   gem "rubocop-rails-omakase", require: false
 
   gem "faker"
+  gem 'cpf_faker'
 end
 
 group :development do
@@ -45,4 +45,6 @@ end
 gem 'cocoon'
 gem 'foreman', github: "ddollar/foreman"
 gem "simple_form"
+gem "sidekiq"
+gem 'kaminari'
 

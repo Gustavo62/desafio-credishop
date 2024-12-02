@@ -1,25 +1,20 @@
 class DiscountRatesController < ApplicationController
   before_action :set_discount_rate, only: %i[ show edit update destroy ]
 
-  # GET /discount_rates or /discount_rates.json
   def index
-    @discount_rates = DiscountRate.all
+    @discount_rates = DiscountRate.all.order(:position)
   end
 
-  # GET /discount_rates/1 or /discount_rates/1.json
   def show
   end
 
-  # GET /discount_rates/new
   def new
     @discount_rate = DiscountRate.new
   end
 
-  # GET /discount_rates/1/edit
   def edit
   end
 
-  # POST /discount_rates or /discount_rates.json
   def create
     @discount_rate = DiscountRate.new(discount_rate_params)
 
@@ -34,7 +29,6 @@ class DiscountRatesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /discount_rates/1 or /discount_rates/1.json
   def update
     respond_to do |format|
       if @discount_rate.update(discount_rate_params)
@@ -47,7 +41,6 @@ class DiscountRatesController < ApplicationController
     end
   end
 
-  # DELETE /discount_rates/1 or /discount_rates/1.json
   def destroy
     @discount_rate.destroy!
 
@@ -58,12 +51,10 @@ class DiscountRatesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_discount_rate
       @discount_rate = DiscountRate.find(params[:id])
     end
 
-    # Only allow a list of trusted parameters through.
     def discount_rate_params
       params.require(:discount_rate).permit(:min, :max, :description, :discount, :position, :year, :active)
     end

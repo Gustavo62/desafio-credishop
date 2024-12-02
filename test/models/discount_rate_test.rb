@@ -38,7 +38,7 @@ class DiscountRateTest < ActiveSupport::TestCase
     initial_amount = 3000.00
     total_amount = 0
 
-    result = DiscountRate.calculate_discount(nil, 1, initial_amount, total_amount)
+    result, group_discount = DiscountRate.calculate_discount(nil, 1, initial_amount, total_amount)
 
     expected_total = 281.62
 

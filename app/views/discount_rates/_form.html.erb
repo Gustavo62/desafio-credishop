@@ -18,19 +18,19 @@
   <div class="row mb-3">
     <div class="col-md-6">
       <%= form.label :min, class: "form-label" %>
-      <%= form.text_field :min, class: "form-control", placeholder: "Enter minimum value" %>
+      <%= form.text_field :min, class: "form-control money-mask", placeholder: "Enter minimum value", data: { action: "discount-rates#moneyInputMask" } %>
     </div>
 
     <div class="col-md-6">
       <%= form.label :max, class: "form-label" %>
-      <%= form.text_field :max, class: "form-control", placeholder: "Enter maximum value" %>
+      <%= form.text_field :max, class: "form-control money-mask", placeholder: "Enter maximum value", data: { action: "discount-rates#moneyInputMask" } %>
     </div>
   </div>
 
 
   <div class="mb-3">
     <%= form.label :discount, class: "form-label" %>
-    <%= form.text_field :discount, class: "form-control", placeholder: "Enter discount rate" %>
+    <%= form.text_field :discount, class: "form-control percentage-mask", placeholder: "Enter discount rate" %>
   </div>
 
   <div class="mb-3">
