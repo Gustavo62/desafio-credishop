@@ -3,12 +3,12 @@ require 'test_helper'
 class DiscountRateTest < ActiveSupport::TestCase
   def setup
     DiscountRate.all.delete_all
-    @discount_rate_1 = DiscountRate.create(position: 1, min: 0.00, max: 1045.00, discount: 0.075)
-    @discount_rate_2 = DiscountRate.create(position: 2, min: 1045.01, max: 2089.60, discount: 0.09)
-    @discount_rate_3 = DiscountRate.create(position: 3, min: 2089.61, max: 3134.40, discount: 0.12)
-    @discount_rate_3 = DiscountRate.create(position: 4, min: 3134.41, max: 6101.06, discount: 0.14)
-    @active_discount_rate = DiscountRate.create(position: 1, min: 0.00, max: 1045.00, discount: 0.075, active: true)
-    @inactive_discount_rate = DiscountRate.create(position: 2, min: 1045.01, max: 2089.60, discount: 0.09, active: false)
+    @discount_rate_1 = DiscountRate.create(position: 1, min: 0.00, max: "R$ 1045,00", discount: "7,5%")
+    @discount_rate_2 = DiscountRate.create(position: 2, min: "R$ 1045,01", max: "R$ 2089,60", discount: "9%")
+    @discount_rate_3 = DiscountRate.create(position: 3, min: "R$ 2089,61", max: "R$ 3134,40", discount: "12%")
+    @discount_rate_3 = DiscountRate.create(position: 4, min: "R$ 3134,41", max: "R$ 6101,06", discount: "14%")
+    @active_discount_rate = DiscountRate.create(position: 1, min: 0.00, max: "R$ 1045,00", discount: "7,5%", active: true)
+    @inactive_discount_rate = DiscountRate.create(position: 2, min: "R$ 1045,01", max: "R$ 2089,60", discount: "9%", active: false)
   end
 
   test "should return active discount rates" do
@@ -35,7 +35,7 @@ class DiscountRateTest < ActiveSupport::TestCase
   end
 
   test '.calculate_discount should calculate the correct discount for given salary' do
-    initial_amount = 3000.00
+    initial_amount = "R$ 3000,00"
     total_amount = 0
 
     result, group_discount = DiscountRate.calculate_discount(nil, 1, initial_amount, total_amount)
@@ -58,5 +58,45 @@ class DiscountRateTest < ActiveSupport::TestCase
 
     assert_in_delta discounted_amount, expected_discount.truncate(2), 0.01
     assert_in_delta new_total_amount, expected_total.truncate(2), 0.01
+  end
+
+  test 'returns 0.0 when value is blank' do
+    result = DiscountRate.clean_value(nil)
+    assert_equal 0.0, result
+  end
+
+  test 'returns the number as a float when value is a valid string' do
+    result = DiscountRate.clean_value('1234.56')
+    assert_equal 1234.56, result
+  end
+
+  test 'cleans value and returns a float when value contains non-numeric characters' do
+    result = DiscountRate.clean_value('R$ 1.234,56')
+    assert_equal 1234.56, result
+  end
+
+  test 'converts comma to period and returns a float for decimal values' do
+    result = DiscountRate.clean_value('1.234,56')
+    assert_equal 1234.56, result
+  end
+
+  test 'divides the value by the divisor' do
+    result = DiscountRate.clean_value('1.000,00', divisor: 10)
+    assert_equal 100.0, result
+  end
+
+  test 'returns 0.0 for invalid values' do
+    result = DiscountRate.clean_value('abc')
+    assert_equal 0.0, result
+  end
+
+  test 'handles values without a decimal part' do
+    result = DiscountRate.clean_value('1234')
+    assert_equal 1234.0, result
+  end
+
+  test 'handles negative values correctly' do
+    result = DiscountRate.clean_value('-1.234,56')
+    assert_equal -1234.56, result
   end
 end

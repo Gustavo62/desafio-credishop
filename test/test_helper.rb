@@ -1,3 +1,6 @@
+require 'coverband'
+require File.dirname(__FILE__) + '/../config/environment'
+
 ENV["RAILS_ENV"] ||= "test"
 require_relative "../config/environment"
 require "rails/test_help"

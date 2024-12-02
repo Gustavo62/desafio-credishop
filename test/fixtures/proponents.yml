@@ -5,8 +5,6 @@ one:
   cpf: MyString
   birthday: 2024-11-30
   salary: 9.99
-  address: one
-  contact: one
   inss_discount: 1.5
 
 two:
@@ -14,6 +12,4 @@ two:
   cpf: MyString
   birthday: 2024-11-30
   salary: 9.99
-  address: two
-  contact: two
   inss_discount: 1.5
