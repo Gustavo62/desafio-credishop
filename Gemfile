@@ -11,7 +11,7 @@ gem "tzinfo-data", platforms: %i[ windows jruby ]
 gem "bootsnap", require: false
 gem "redis"
 
-gem "bootstrap", "~> 4.3.1"
+gem "bootstrap", "~> 5.3.3"
 gem "sassc-rails"
 gem "webpacker"
 gem "chart-js-rails"
