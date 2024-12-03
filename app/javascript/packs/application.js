@@ -1,7 +1,10 @@
 import { Tooltip, Popover } from 'bootstrap'
 import Chart from 'chart.js/auto'
 
-import './add_jquery'
+import jquery from 'jquery'
+window.jQuery = jquery
+window.$ = jquery
+
 import "@nathanvda/cocoon";
 
 import { Application } from "stimulus"

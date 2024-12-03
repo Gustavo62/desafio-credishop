@@ -13,7 +13,7 @@ gem "redis"
 
 gem "bootstrap", "~> 4.3.1"
 gem "sassc-rails"
-gem "webpacker"
+gem 'webpacker', '~> 5.0'
 gem "chart-js-rails"
 
 gem "rubocop", require: false
@@ -38,6 +38,7 @@ group :development, :test do
 
   gem "capybara"
   gem "selenium-webdriver"
+  gem "coverband"
 end
 
 group :development do
@@ -48,10 +49,10 @@ group :development do
 end
 
 group :test do
-  gem "coverband"
   gem 'rack'
 end
 
-gem 'foreman', github: "ddollar/foreman"
 gem 'jwt'
 gem "devise"
+gem 'ostruct'
+

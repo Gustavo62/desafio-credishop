@@ -1,15 +1,19 @@
 default: &default
   adapter: postgresql
   encoding: unicode
-  pool: 5
   username: postgres
   password: postgres
-  # host: db
+  # pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  # url: <%= ENV['DATABASE_URL'] %>
 
 development:
   <<: *default
-  database: desafio_credishop_development
+  database: credishop_development
 
 test:
   <<: *default
-  database: desafio_credishop_test
+  database: credishop_test
+
+production:
+  <<: *default
+  database: credishop_production

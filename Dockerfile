@@ -1,23 +1,34 @@
-# Usar uma imagem oficial do Ruby como base
-FROM ruby:3.3.5-bullseye
+# Usa a imagem base Ruby
+FROM ruby:3.3
 
-# Instalar dependências de sistema
-RUN apt-get update -qq && apt-get install -y nodejs postgresql-client
+# Instala dependências do sistema
+RUN apt-get update -qq && apt-get install -y \
+  build-essential \
+  libpq-dev \
+  nodejs \
+  postgresql-client \
+  curl
 
-# Definir o diretório de trabalho dentro do contêiner
+# Instala Yarn usando o método oficial
+RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
+    echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list && \
+    apt-get update -qq && apt-get install -y yarn
+
+# Define o diretório de trabalho dentro do contêiner
 WORKDIR /app
 
-# Copiar o Gemfile e o Gemfile.lock para o contêiner
-COPY Gemfile Gemfile.lock ./
+# Copia o Gemfile e o Gemfile.lock para instalar as gems
+COPY Gemfile* ./
+RUN bundle install
 
-# Instalar as dependências do bundle
-RUN gem install bundler:2.3.26 && bundle install
-
-# Copiar todo o código da aplicação para o contêiner
+# Copia os arquivos do projeto para o contêiner
 COPY . .
 
-# Configurar a porta em que a aplicação irá rodar
+# Instala dependências do Webpacker
+RUN yarn install
+
+# Expõe a porta padrão do Rails
 EXPOSE 3000
 
-# Definir o comando para rodar o servidor Rails
-CMD ["bin/rails", "server", "-b", "0.0.0.0"]
+# Comando padrão do contêiner
+CMD ["sh", "bin/start-rails.sh"]
