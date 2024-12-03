@@ -33,7 +33,6 @@ export function moneyInputMask() {
 
   moneyFields.forEach((field) => {
     if (!field.inputmask) {
-      console.log('123')
       const mask = new Inputmask({
         alias: "numeric",
         prefix: "R$ ",

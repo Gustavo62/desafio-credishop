@@ -16,7 +16,6 @@ export default class extends Controller {
         if (discountRate) {
           const label = `Grupo ${group} faixa R$ ${discountRate.min} - ${discountRate.max}`;
           groupedData[label] = (groupedData[label] || 0) + 1;
-          console.log(groupedData[label])
         }
       });
 
@@ -34,11 +33,9 @@ export default class extends Controller {
 
       const groupedData = groupByDiscount(proponents, discountRates);
 
-      console.log(groupedData);
-
       const labels = Object.keys(groupedData);
       const values = Object.values(groupedData);
-      console.log(labels)
+
       const chartData = {
         labels: labels,
         datasets: [{
